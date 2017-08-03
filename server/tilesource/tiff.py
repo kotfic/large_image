@@ -65,7 +65,8 @@ class TiffFileTileSource(FileTileSource):
         for directoryNum in itertools.count():
             try:
                 td = TiledTiffDirectory(largeImagePath, directoryNum)
-            except ValidationTiffException as lastException:
+            except ValidationTiffException as exc:
+                lastException = exc
                 continue
             except TiffException as exc:
                 if not lastException:
